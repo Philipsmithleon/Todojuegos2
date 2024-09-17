@@ -1,0 +1,15 @@
+{% extends 'juegos/base_generic.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Editar Juego</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+        <a href="{% url 'ver_juegos_por_categoria' juego.categoria %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
+
+

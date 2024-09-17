@@ -1,0 +1,12 @@
+{% extends 'juegos/base_generic.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <h2>¿Estás seguro de que deseas eliminar "{{ juego.nombre }}"?</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a href="{% url 'ver_juegos_por_categoria' juego.categoria%}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

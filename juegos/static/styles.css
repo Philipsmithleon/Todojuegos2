@@ -1,0 +1,130 @@
+html,body {
+    background-color: #2e2e2e;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff8c00;
+  }
+  .navbar-nav .nav-link {
+    color: #ffffff;
+  }
+  footer{
+    margin-top: 6%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  @media (max-width: 768px) {
+    footer {
+      position: relative;
+    }
+  }
+  footer p{
+    padding:0.5rem;
+    margin-bottom: 0;
+  }
+  .hero {
+    background: url("img/bg.jpg")
+      no-repeat center center;
+    background-size: 100% 100%;
+    padding: 125px 0;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 3rem;
+    color: #ffa500;
+  }
+  .hero p {
+    font-size: 1.5rem;
+    color: #ffa500;
+  }
+  .a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .category-cards .card {
+    background-color: #444;
+    border: none;
+  }
+  .category-cards .card img {
+    max-height: 150px;
+    object-fit: cover;
+  }
+  .category-cards .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  .item a::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+  }
+
+.card-img-container {
+    position: relative;
+    width: 100%;
+    height: 200px; 
+  }
+  
+
+  .card-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+  }
+  
+
+  .card-bodyx {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); 
+    color: #ffffff; 
+  }
+  
+
+  .card-title {
+    margin: 0;
+    font-size: 1.5rem; 
+    font-weight: bold;
+  }
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+img.img-fluid {
+    max-height: 400px;
+    object-fit: cover;
+}
+.modal-body{
+  color: black;
+}
+.modal-header.bg-success {
+  background-color: #28a745;
+  color: white;
+}
+.modal-header.bg-danger {
+  background-color: #dc3545;
+  color: white;
+}

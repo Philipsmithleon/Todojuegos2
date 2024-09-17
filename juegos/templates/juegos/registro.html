@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoJuegos - Registro de usuario</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'script.js' %}"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'index' %}"
+          >Todo<span style="color: #ffa500">Juegos</span></a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <h2>Registro</h2>
+      <form method="post">
+          {% csrf_token %}
+          <div class="form-group">
+              <label for="username">Nombre de Usuario</label>
+              <input type="text" class="form-control" id="username" name="username" required>
+              <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group">
+              <label for="email">Correo Electrónico</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+              <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group">
+              <label for="password1">Contraseña</label>
+              <input type="password" class="form-control" id="password1" name="password1" required>
+              <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group">
+              <label for="password2">Confirmar Contraseña</label>
+              <input type="password" class="form-control" id="password2" name="password2" required>
+              <div class="invalid-feedback"></div>
+          </div>
+          <button type="submit" class="btn btn-primary">Registrarse</button>
+      </form>
+  </div>
+
+  <!-- Modal de retroalimentación -->
+  <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="feedbackModalLabel">Éxito</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  ¡Registro exitoso! Redirigiendo...
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <script>
+     document
+  .getElementById("registrationForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    let isValid = true;
+
+    const fullName = document.getElementById("fullName");
+    const username = document.getElementById("username");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirmPassword");
+    const birthdate = document.getElementById("birthdate");
+    const address = document.getElementById("address");
+
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i;
+    const passwordPattern = /(?=.*\d)(?=.*[A-Z]).{6,18}/;
+
+    function showError(input, message) {
+      let errorDiv = input.nextElementSibling;
+      if (!errorDiv) {
+        errorDiv = document.createElement('div');
+        errorDiv.classList.add('invalid-feedback');
+        input.parentNode.appendChild(errorDiv);
+      }
+      errorDiv.innerText = message;
+      input.classList.add("is-invalid");
+      isValid = false;
+    }
+
+    function clearError(input) {
+      let errorDiv = input.nextElementSibling;
+      if (errorDiv) {
+        errorDiv.innerText = "";
+        input.classList.remove("is-invalid");
+      }
+    }
+
+    clearError(fullName);
+    clearError(username);
+    clearError(email);
+    clearError(password);
+    clearError(confirmPassword);
+    clearError(birthdate);
+    clearError(address);
+
+    if (fullName.value.trim() === "") {
+      showError(fullName, "El nombre completo es requerido.");
+    }
+
+    if (username.value.trim() === "") {
+      showError(username, "El nombre de usuario es requerido.");
+    }
+
+    if (!emailPattern.test(email.value)) {
+      showError(email, "El correo electrónico no es válido.");
+    }
+
+    if (!passwordPattern.test(password.value)) {
+      showError(
+        password,
+        "La contraseña debe tener entre 6 y 18 caracteres, contener al menos un número y una letra mayúscula."
+      );
+    }
+
+    if (password.value !== confirmPassword.value) {
+      showError(confirmPassword, "Las contraseñas no coinciden.");
+    }
+
+    const birthdateValue = new Date(birthdate.value);
+    const today = new Date();
+    let age = today.getFullYear() - birthdateValue.getFullYear();
+    const monthDiff = today.getMonth() - birthdateValue.getMonth();
+
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthdateValue.getDate())
+    ) {
+      age--;
+    }
+
+    if (birthdate.value === "" || age < 13) {
+      showError(
+        birthdate,
+        "Debes tener al menos 13 años para registrarte."
+      );
+    }
+
+    if (address.value.trim() === "") {
+      showError(address, "La dirección de despacho es requerida.");
+    }
+
+    if (isValid) {
+        document.getElementById("registrationForm").submit();
+    }
+  });
+
+    </script>
+  </body>
+</html>

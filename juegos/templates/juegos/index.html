@@ -1,0 +1,83 @@
+
+{% extends 'juegos/base_generic.html' %}
+{% load static %}
+{% block content %}
+    <div class="hero">
+      <div class="container">
+        <h1>Categorías</h1>
+        <p>Todos los juegos que necesita un verdadero gamer. ¿Qué esperas a comprarlos?</p>
+      </div>
+    </div>
+
+
+    <!----------- Categorías -------------------->
+    <div class="container my-5">
+      <div class="row category-cards">
+        <!-- Categoría 1 -->
+        <div class="item col-md-4 mb-4">
+          <div class="card text-center">
+            <img src="{% static 'img/mini/terror.png' %}" class="card-img-top" alt="Terror" />
+            <div class="card-bodyx">
+              <h5 class="card-title">TERROR</h5>
+              <a href="{% url 'ver_juegos_por_categoria' 1 %}"></a>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Categoría 2 -->
+        <div class="item col-md-4 mb-4">
+          <div class="card text-center">
+            <img src="{% static 'img/mini/accion.png' %}" class="card-img-top" alt="Acción" />
+            <div class="card-bodyx">
+              <h5 class="card-title">ACCIÓN</h5>
+              <a href="{% url 'ver_juegos_por_categoria' 2 %}"></a>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Categoría 3 -->
+        <div class="item col-md-4 mb-4">
+          <div class="card text-center">
+            <img src="{% static 'img/mini/carreras.png' %}" class="card-img-top" alt="Carreras" />
+            <div class="card-bodyx">
+              <h5 class="card-title">CARRERAS</h5>
+              <a href="{% url 'ver_juegos_por_categoria' 3 %}"></a>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Categoría 4 -->
+        <div class="item col-md-4 mb-4">
+          <div class="card text-center">
+            <img src="{% static 'img/mini/deportes.png' %}" class="card-img-top" alt="Deportes" />
+            <div class="card-bodyx">
+              <h5 class="card-title">DEPORTES</h5>
+              <a href="{% url 'ver_juegos_por_categoria' 4 %}"></a>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Categoría 5 -->
+        <div class="item col-md-4 mb-4">
+          <div class="card text-center">
+            <img src="{% static 'img/mini/supervivencia.png' %}" class="card-img-top" alt="SUPERVIVENCIA" />
+            <div class="card-bodyx">
+              <h5 class="card-title">SUPERVIVENCIA</h5>
+              <a href="{% url 'ver_juegos_por_categoria' 5 %}"></a>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Categoría 6 -->
+        <div class="item col-md-4 mb-4">
+          <div class="card text-center">
+            <img src="{% static 'img/mini/mundo.png' %}" class="card-img-top" alt="Mundo abierto" />
+            <div class="card-bodyx">
+              <h5 class="card-title">MUNDO ABIERTO</h5>
+              <a href="{% url 'ver_juegos_por_categoria' 6 %}"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
