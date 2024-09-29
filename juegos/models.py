@@ -46,20 +46,15 @@ class CarritoJuegos(models.Model):
         return f'{self.cantidad} x {self.juego.nombre}'
     
 class Pedido(models.Model):
-    ESTADOS_PEDIDO = [
-        ('pendiente', 'Pendiente'),
-        ('enviado', 'Enviado'),
-        ('entregado', 'Entregado'),
-        ('cancelado', 'Cancelado'),
-    ]
+    juego = models.ForeignKey(Juego, on_delete=models.CASCADE)
+    
+    cantidad = models.IntegerField(default=1)
 
+    fecha = models.DateTimeField(auto_now_add=True)
+    
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    fecha_pedido = models.DateTimeField(auto_now_add=True)
-    estado = models.CharField(max_length=20, choices=ESTADOS_PEDIDO, default='pendiente')
-    total = models.DecimalField(max_digits=10, decimal_places=2)
-
     def __str__(self):
-        return f'Pedido #{self.id} de {self.usuario.username} - {self.estado}'
+        return f"Pedido {self.id} - {self.juego.nombre} por {self.usuario.username}"
     
 class Descuento(models.Model):
     codigo = models.CharField(max_length=20, unique=True)

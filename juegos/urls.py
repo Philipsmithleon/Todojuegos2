@@ -1,11 +1,25 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
 from .forms import CustomLogoutView
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework.routers import DefaultRouter
+from .views import JuegoViewSet, PedidoViewSet
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+# Creamos un router que se encargará de las rutas de los ViewSets
+router = DefaultRouter()
+router.register(r'juegos', JuegoViewSet)  # Registrar el ViewSet de Producto
+router.register(r'pedidos', PedidoViewSet)
 
 urlpatterns = [
+    path('', views.index, name='home'),
     path('', views.index, name='index'),
     path('registro/', views.registro, name='registro'),
     path('categoria/<int:categoria>/', views.ver_juegos_por_categoria, name='ver_juegos_por_categoria'),
@@ -25,6 +39,14 @@ urlpatterns = [
     path('carrito/eliminar/<int:producto_id>/', views.eliminar_del_carrito, name='eliminar_del_carrito'),
     path('carrito/vaciar/', views.vaciar_carrito, name='vaciar_carrito'),
     path('redirigir/', views.ultima_pagina, name='ultima_pagina'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/', include(router.urls)),  # Incluir las rutas del router en la URL base 'api/'
+    path('pedidos/', views.ListaPedidosView.as_view(), name='lista_pedidos'),
+    path('pedidos/crear/', views.CrearPedidoView.as_view(), name='crear_pedido'),
+    path('pedidos/editar/<int:pk>/', views.EditarPedidoView.as_view(), name='editar_pedido'),
+    path('pedidos/eliminar/<int:pk>/', views.EliminarPedidoView.as_view(), name='eliminar_pedido'),
+    path('chiste/', views.ChisteView.as_view(), name='chiste'), 
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,16 @@
+{% extends 'juegos/base_generic.html' %}
+
+{% block title %}Chiste del Día{% endblock %}
+
+{% block content %}
+<h2 class="my-4">Chiste del Día</h2>
+
+<!-- Mostrar el chiste obtenido desde JokeAPI -->
+<div class="alert alert-info">
+    <strong>Chiste:</strong> {{ chiste }}
+</div>
+
+<!-- Enlace para volver a la página principal -->
+<a href="{% url 'home' %}" class="btn btn-primary">Volver a Inicio</a>
+
+{% endblock %}
